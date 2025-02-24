@@ -1,0 +1,18 @@
+<div class="letters-container mb-3">
+  <% @letters.each do |letter| %>
+    <div class="square-letter">
+      <p><%= letter %></p>
+    </div>
+  <% end %>
+</div>
+
+<form class="row g-3" action="/score" method="post" data-turbo="false">
+  <div class="col-auto">
+  <input class="form-control form-control-lg" type="text" name="word" value="<%= params[:word] %>" placeholder="Type your word">
+  </div>
+  <div class="col-auto">
+    <input class="btn btn-primary btn-lg" type="submit" value="Ask!">
+  </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= hidden_field_tag 'letters', @letters.join(" ") %>
+</form>
